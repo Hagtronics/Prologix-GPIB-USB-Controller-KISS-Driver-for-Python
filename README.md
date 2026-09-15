@@ -7,7 +7,7 @@ However, there is a need for a bare minimum, 'Keep It Simple Stupid' or KISS dri
   
 Why? Because many times I have a need to quickly throw together a few GPIB instrumets to make a one off measurement that requires only a few commands to be sent to a few instruments. No need to waste time 'encapsulating' the instruments functionality into a full blown class and no need for AsyncIO.  
   
-This driver fulfills this need. Basic GPIB functionality that can get you talking to an instrument very quickly.  
+This driver fulfills this need. Bare minimum GPIB functionality that can get you talking to an instrument very quickly.  
   
 That's all! If you know the basic SCPI commands that you need to configure your instrument, and make a measurement, then that is all you need. No spending hours writing more code.  
 
