@@ -17,7 +17,7 @@ Usage:
    place code here
    ```  
   
-That's all! If you know the basic SCPI commands that you need to make a measurement, then that is all you need.  
+That's all! If you know the basic SCPI commands that you need to configure your instrument, and make a measurement, then that is all you need.  
   
 Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial supports.  
   
