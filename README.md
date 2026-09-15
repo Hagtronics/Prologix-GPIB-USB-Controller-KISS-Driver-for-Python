@@ -25,7 +25,7 @@ This driver is just as simple as the only instrument commands are ```write(inst_
 
 The equivalent code to above using this driver with Python is,
 ``` Python
-import prologix_usb_to_gpib            # Import the driver
+import prologix_gpib_usb            # Import the driver
 gpib = PrologixUsbToGpib(com_port=10)  # Setup with the COM port of the Prologix adapter, get a handle
 rdg = gpib.write_read(22, '*IDN?')     # Send command to instrument at address 22, get response.
 print(rdg)                             # Print the result
@@ -34,7 +34,8 @@ print(rdg)                             # Print the result
 ### Usage:
 1) Get the code from the 'src' directory here, and place it somewhere where your Python program can find it.  
 2) Use this simple outline to get going,  
-   ``` Python  
+   ``` Python
+    import prologix_gpib_usb
     inst_addr = 22                          # 22 is the instrument GPIB address
     gpib = PrologixGpibUsb(com_port=10)     # 10 is the COM port that the Prologix adapter is on
 
@@ -95,15 +96,10 @@ I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I d
 ### User Settable Properties:  
 The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
   
-### Driver Class Outline 'Tree View':  
+### Driver Class Outline 'Tree View' of public properties and functions:  
 ```
 prologix_gpib_usb.py
 └── PrologixGpibUsb
-    ├── __init__()
-    ├── __del__()
-    ├── _to_bytes()
-    ├── _to_string()
-    ├── _check_address()
     ├── read_timeout_sec() @property
     ├── write_timeout_sec() @property
     ├── write_to_read_delay_sec() @property
@@ -111,10 +107,13 @@ prologix_gpib_usb.py
     ├── write()
     └── write_read()
 ```
-    
+### Troubleshooting:  
+1) If your program crashes, the COM port may get stuck open by Windows. Un-plug and re-plug the Prologix Adapter to release the port.  
+2) The Prologix Adapter itself may hang up i.e. You can open the COM port but all you get are timeout errors. Un-plug and re-plug the Prologix Adapter to reset it.  
+   
 ### Testing:  
 Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial and the FTDI VCP driver supports.  
-
+  
 ### References:
-* Source for Prologix USb to GPIB Adapters: https://prologix.biz/  
+* Source for Prologix GPIB to USB Adapters: https://prologix.biz/  
   
