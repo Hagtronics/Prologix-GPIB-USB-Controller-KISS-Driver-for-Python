@@ -38,7 +38,7 @@ print(rdg)                             # Print the result
    place code here
    ```
 #### User Hint: 
-I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I don't have to remember what port the PC assigned to the Adapter and I don't have to worry about the PC changing it on me in the future. Then I write this COM Port number on my adapter for easy 'recall'. On Windows, A specific COM port can be set by go to 'Device Manager', then selecting the Prologix COM port, right click and select 'Driver', then go to 'Advanced' and set a fixed COM port (one that isn't already in use by the PC). I usually pick COM port 10, but you can pick anything that isn't already in use by the PC. 
+I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I don't have to remember what port the PC assigned to the Adapter and I don't have to worry about the PC changing it on me in the future. Then I write this COM Port number on my adapter for easy 'recall'. On Windows, a specific COM port can be set by going to: 'Device Manager', then selecting the Prologix COM port that Windows assigned, right click and select 'Driver', then go to 'Advanced' and set a fixed COM port (one that isn't already in use by the PC). I usually pick COM port 10, but you can pick anything that isn't already in use by the PC. 
   
 ### User Settable Properties:  
 The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
