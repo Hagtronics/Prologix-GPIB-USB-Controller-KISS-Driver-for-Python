@@ -58,10 +58,13 @@ print(rdg)                             # Print the result
     gpib.terminator = '\r\n'
     # ----------------------------------------------------------------------
 
-    # Reset instrument, clear errors, wait till done.
-    opc = gpib.write_read(inst_addr, '*RST;*CLS;*OPC?')
-    print(f'{opc = }')
+    # Simple write a command with no response
+    gpib.write(inst_addr, '*CLS')
 
+    # Simple compound command write, wait for complete response
+    opc = gpib.write_read(inst_addr, '*RST;*OPC?')
+    print(f'{opc = }')
+   
     # Get the *IDN? String
     idn = gpib.write_read(inst_addr, '*IDN?')
     print(f'{idn = }')
@@ -74,12 +77,11 @@ print(rdg)                             # Print the result
 
     """
     For a HP34401 DVM at address 22, this will print,
-
-        opc = '1'
+   
         idn = 'HEWLETT-PACKARD,34401A,0,11-5-2'
         err = '+0,"No error"'
 
-    If the instrument can't be found the OPC will return '', meaning a timeout.
+    If the instrument can't be found the '*IDN?' will return '', meaning a timeout.
 
     Note: Not all GPIB instruments support the simple commands tested above.
     Most support '*IDN?' however.
