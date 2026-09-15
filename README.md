@@ -1,4 +1,4 @@
-# Prologix-GPIB-USB-Controller-KISS-Driver-for-Python
+# Prologix GPIB-USB Controller KISS Driver for Python 3
 A 'Keep It Simple Stupid' (KISS) Python Driver for the Prologix GPIB-USB Controller.  
 
 There are other drivers available. One encapsulates the instruments functionality, another adds AsyncIO threading. Both are nice.  
