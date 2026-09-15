@@ -122,8 +122,8 @@ prologix_gpib_usb.py
     ├── write_timeout_sec() @property
     ├── write_to_read_delay_sec() @property
     ├── terminator() @property
-    ├── write()
-    └── write_read()
+    ├── write() -> None
+    └── write_read() -> str
 ```
 ### Troubleshooting:  
 1) If your program crashes, the COM port may get stuck open by Windows. Un-plug and re-plug the Prologix Adapter to release the port.  
