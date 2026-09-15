@@ -9,7 +9,7 @@ Why? Because many times I have a need to quickly throw together a few GPIB instr
   
 This driver fulfills this need. Bare minimum GPIB functionality that can get you talking to an instrument very quickly.  
   
-That's all! If you know the basic SCPI commands that you need to configure your instrument, and make a measurement, then that is all you need. No spending hours writing more code.  
+That's all! If you know the basic SCPI commands that you need to configure your instrument, and make a measurement, then that is all you need. No spending hours writing more code or figuring out a more complicated driver.  
 
 ### Driver KISS Philosophy:
 This driver is based on the 'old' HP Basic model of ```OUTPUT``` and ```ENTER``` commands like,
