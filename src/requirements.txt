@@ -1,2 +1,3 @@
-# Requires the FTDI USB Bridge Driver to be installed. See the Prologix Manual.
+# Requires the FTDI Virtual Com Port (VCP) Driver to be installed. See the Prologix Manual, or,
+# https://ftdichip.com/drivers/
 pyserial==3.5
