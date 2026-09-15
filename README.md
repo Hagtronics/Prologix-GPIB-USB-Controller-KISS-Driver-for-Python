@@ -13,7 +13,7 @@ That's all! If you know the basic SCPI commands that you need to configure your 
 
 ### Driver KISS Philosophy:
 This driver is based on the 'old' HP Basic model of ```OUTPUT``` and ```ENTER``` commands like,
-``` BASIC
+```
 ASSIGN @Dmm TO 722      ! 22 is the Instrument Address
 OUTPUT @Dmm; "*IDN?"    ! Send the command
 ENTER @Dmm; Rdg         ! Get the result
@@ -24,7 +24,7 @@ Where each write or read includes the instruments GPIB address and the command s
 This driver is just as simple as the only instrument commands are ```write(inst_address, cmd_str)``` and ```write_read(inst_address, cmd_str)```. The driver takes care of adding and removing the string terminator characters appropriately, and also takes care of properly setting the GPIB address in the Prologix controller.  
 
 The equivalent code using this driver in Python is,
-```
+``` Python
 import prologix_usb_to_gpib            # Import the driver
 gpib = PrologixUsbToGpib(com_port=10)  # Setup with the COM port of the Prologix adapter, get a handle
 rdg = gpib.write_read(22, '*IDN?')     # Send command to instrument at address 22, get response.
