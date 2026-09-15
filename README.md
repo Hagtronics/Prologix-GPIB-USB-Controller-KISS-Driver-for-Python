@@ -13,7 +13,7 @@ That's all! If you know the basic SCPI commands that you need to configure your 
 
 ### Driver KISS Philosophy:
 This driver is based on the 'old' HP Basic model of ```OUTPUT``` and ```ENTER``` commands like,
-```
+``` Basic
 ASSIGN @Dmm TO 722      ! 22 is the Instrument Address
 OUTPUT @Dmm; "*IDN?"    ! Send the command
 ENTER @Dmm; Rdg         ! Get the result
