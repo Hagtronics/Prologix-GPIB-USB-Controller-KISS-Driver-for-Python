@@ -34,7 +34,7 @@ print(rdg)                             # Print the result
 ### Usage:
 1) Get the code here, from the 'src' directory, and place it somewhere where your program can find it.  
 2) Use this simple outline to get going,  
-   ```  
+   ``` Python  
    place code here
    ```
 
