@@ -1,2 +1,2 @@
 # Requires the FTDI USB Bridge Driver to be installed. See Prologix Manual.
-pyserial == 3.5
+pyserial==3.5
