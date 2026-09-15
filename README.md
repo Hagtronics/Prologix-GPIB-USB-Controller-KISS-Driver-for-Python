@@ -77,7 +77,8 @@ print(rdg)                             # Print the result
 
     """
     For a HP34401 DVM at address 22, this will print,
-   
+
+        opc = '1'
         idn = 'HEWLETT-PACKARD,34401A,0,11-5-2'
         err = '+0,"No error"'
 
