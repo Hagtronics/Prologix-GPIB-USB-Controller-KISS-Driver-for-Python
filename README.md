@@ -35,8 +35,57 @@ print(rdg)                             # Print the result
 1) Get the code from the 'src' directory here, and place it somewhere where your Python program can find it.  
 2) Use this simple outline to get going,  
    ``` Python  
-   place code here
+    inst_addr = 22                          # 22 is the instrument GPIB address
+    gpib = PrologixGpibUsb(com_port=10)     # 10 is the COM port that the Prologix adapter is on
+
+    # ----- These next properties are optional, defaults normally work just fine -----
+
+    # I have to use this on very old instruments, sometimes as long as 1 second.
+    # None of my 'modern' SCPI enabled instruments require this.
+    # This is the delay from when an write ends, to when a read begins.
+    # None (or 0) sets 0 delay. Default is None
+    gpib.write_to_read_delay_sec = None
+
+    # On long operations sometimes a very long read timeout is required.
+    # Default is 10 seconds to follow default for most GPIB cards.
+    # None is blocking until the termination characters are received,
+    # 0 is non-blocking returns immediately with any data.
+    gpib.read_timeout_sec = 10
+
+    # Some older instruments are 'funny' as to the terminator,
+    # this shows how to set a line terminator if you need to.
+    # Default is '\r\n'
+    gpib.terminator = '\r\n'
+    # ----------------------------------------------------------------------
+
+    # Reset instrument, clear errors, wait till done.
+    opc = gpib.write_read(inst_addr, '*RST;*CLS;*OPC?')
+    print(f'{opc = }')
+
+    # Get the *IDN? String
+    idn = gpib.write_read(inst_addr, '*IDN?')
+    print(f'{idn = }')
+
+    # Get any errors
+    err = gpib.write_read(inst_addr, 'SYSTem:ERRor?')
+    print(f'{err = }')
+
+    sys.exit()
+
+    """
+    For a HP34401 DVM at address 22, this will print,
+
+        opc = '1'
+        idn = 'HEWLETT-PACKARD,34401A,0,11-5-2'
+        err = '+0,"No error"'
+
+    If the instrument can't be found the OPC will return '', meaning a timeout.
+
+    Note: Not all GPIB instruments support the simple commands tested above.
+    Most support '*IDN?' however.
+    """
    ```
+     
 #### User Hint: 
 I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I don't have to remember what port the PC assigned to the Adapter. Then I write this COM Port number on my adapter for easy 'recall'. On Windows, a specific COM port can be set by going to: 'Device Manager', then selecting the Prologix COM port that Windows assigned, right click and select 'Driver', then go to 'Advanced' and set a fixed COM port (one that isn't already in use by the PC). I usually pick COM port 10, but you can pick anything that isn't already in use by the PC. Now your code will work on any PC that you have 'set' and and you don't have to worry about the PC changing the port on you in the future, breaking your code.
   
