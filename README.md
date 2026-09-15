@@ -46,4 +46,7 @@ The default properties will work for the majority of modern SCPI instruments. Ho
     
 ### Testing:  
 Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial and the FTDI driver supports.  
+
+### References:
+* Source for Prologix USb to GPIB Adapters: https://prologix.biz/  
   
