@@ -38,7 +38,7 @@ print(rdg)                             # Print the result
    place code here
    ```
 
-### Driver Uses Settable Properties:  
+### User Settable Properties:  
 The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
   
   
