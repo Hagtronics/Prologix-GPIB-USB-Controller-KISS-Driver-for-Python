@@ -233,7 +233,7 @@ if __name__ in '__main__':
         idn = 'HEWLETT-PACKARD,34401A,0,11-5-2'
         err = '+0,"No error"'
 
-    If the instrument can't be found the '*IDN?' will return '', meaning a timeout.
+    If the instrument can't be found the '*OPC?' will return '', meaning a timeout.
 
     Note: Not all GPIB instruments support the simple commands tested above.
     Most support '*IDN?' however.
