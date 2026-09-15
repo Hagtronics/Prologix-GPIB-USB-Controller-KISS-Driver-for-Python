@@ -12,7 +12,7 @@ This driver fulfills this need. Basic GPIB functionality that can get you talkin
 That's all! If you know the basic SCPI commands that you need to configure your instrument, and make a measurement, then that is all you need. No spending hours writing more code.  
 
 ### Driver KISS Philosophy:
-This driver is based on the 'old' HP Basic model of 'output and 'enter' commands like,
+This driver is based on the 'old' HP Basic model of ```OUTPUT``` and ```ENTER``` commands like,
 ```
 ASSIGN @Dmm TO 722      ! 22 is the Instrument Address
 OUTPUT @Dmm; "*IDN?"    ! Send the command
