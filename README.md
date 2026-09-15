@@ -11,11 +11,11 @@ This driver fulfills this need. Basic GPIB functionality that can get you talkin
   
 Usage:
 
-1) Get the code here, and place it somewhere where your program can find it.
-2) Use this simple outline to get going,
-   ```
+1) Get the code here, from the 'src' directory, and place it somewhere where your program can find it.  
+2) Use this simple outline to get going,  
+   ```  
    place code here
-   ```
+   ```  
   
 That's all! If you know the basic SCPI commands that you need to make a measurement, then that is all you need.  
   
