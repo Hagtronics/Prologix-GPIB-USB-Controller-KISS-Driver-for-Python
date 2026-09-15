@@ -19,7 +19,9 @@ OUTPUT @Dmm; "*IDN?"    ! Send the command
 ENTER @Dmm; Rdg         ! Get the result
 PRINT Rdg               ! print the result
 ```
-Where each write or read includes the instruments GPIB address and the command string. This driver is just as simple as the only instrument commands are ```write(inst_address, cmd_str)``` and ```write_read(inst_address, cmd_str)```. The driver takes care of adding and removing the string terminator characters appropriately, and also takes care of properly setting the GPIB address in the Prologix controller.  
+Where each write or read includes the instruments GPIB address and the command string. Simple to understand and fast to get going.  
+  
+This driver is just as simple as the only instrument commands are ```write(inst_address, cmd_str)``` and ```write_read(inst_address, cmd_str)```. The driver takes care of adding and removing the string terminator characters appropriately, and also takes care of properly setting the GPIB address in the Prologix controller.  
 
 The equivalent code using this driver in Python is,
 ```
