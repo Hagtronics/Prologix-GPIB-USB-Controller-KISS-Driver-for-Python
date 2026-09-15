@@ -96,6 +96,24 @@ I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I d
 ### User Settable Properties:  
 The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
   
+```read_timeout_sec(value)```
+ read_timeout_sec (float | None): None is blocking, 0 is non-blocking returns immediately with any data,
+ else the timeout in seconds.
+ Default is: 10 Seconds
+  
+```write_timeout_sec(value)```
+ write_timeout_sec (float | None): None or 0 is forever, else the timeout in seconds.
+ Default is: None
+  
+```write_to_read_delay_sec(value)```
+ write_to_read_delay_sec (float | None): None is the same a zero seconds delay,
+ else the delay in seconds to delay from the write to read function.
+ Default is: None
+  
+```def terminator(value)```
+  Sets the terminator character(s) that will be sent after every command string.
+  Default is: '\r\n'
+  
 ### Driver Class Outline 'Tree View' of public properties and functions:  
 ```
 prologix_gpib_usb.py
