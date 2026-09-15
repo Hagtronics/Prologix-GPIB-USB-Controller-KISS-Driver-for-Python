@@ -5,7 +5,7 @@ There are other drivers available. One encapsulates the instruments functionalit
 
 However, there is a need for a bare minimum, 'Keep It Simple Stupid' or KISS driver that doesn't take an hour to get going.
   
-Why? Because many times I have a need to quickly throw together a few GPIB instrumets to make a one off measurement that requires only a few commands to be sent to a few instruments. No need to spend time 'encapsulating' the instruments functionality into a full blown class and no need for AsyncIO.  
+Why? Because many times I have a need to quickly throw together a few GPIB instruments to make a one off measurement that requires only a few commands to be sent to a few instruments. No need to spend time 'encapsulating' the instruments functionality into a full blown class and no need for AsyncIO.  
   
 This driver fulfills this need. Bare minimum GPIB functionality that can get you talking to an instrument very quickly.  
   
@@ -32,12 +32,13 @@ print(rdg)                             # Print the result
 ```
   
 ### Usage:
-1) Get the code from the 'src' directory here, and place it somewhere where your program can find it.  
+1) Get the code from the 'src' directory here, and place it somewhere where your Python program can find it.  
 2) Use this simple outline to get going,  
    ``` Python  
    place code here
    ```
-
+User Hint: I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I don't have to remember what port the PC assigned to the Prologix Adapter and I don't have to worry about it changing on me in the future. Then I write this COM Port number on my adapter for easy 'recall'. On Windows, A specific COM port can be set by go to 'Device Manager', then selecting the Prologix COM port, right click and select 'Driver', then go to 'Advanced' and set a fixed COM port (one that isn't already in use by the PC). I usually pick COM port 10, but you can pick anything that isn't already in use by the PC. 
+  
 ### User Settable Properties:  
 The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
   
