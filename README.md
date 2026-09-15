@@ -110,7 +110,7 @@ The default properties will work for the majority of modern SCPI instruments. Ho
  else the delay in seconds to delay from the write to read function.
  Default is: None
   
-```def terminator(value)```
+```terminator(value)```
   Sets the terminator character(s) that will be sent after every command string.
   Default is: '\r\n'
   
