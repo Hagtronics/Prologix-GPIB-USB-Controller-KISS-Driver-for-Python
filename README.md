@@ -9,15 +9,32 @@ Why? Because many times I have a need to quickly throw together a few GPIB instr
   
 This driver fulfills this need. Basic GPIB functionality that can get you talking to an instrument very quickly.  
   
-Usage:
+That's all! If you know the basic SCPI commands that you need to configure your instrument, and make a measurement, then that is all you need. No spending hours writing more code.  
 
+### Driver KISS Philosophy:
+This driver is based on the 'old' HP Basic model of 'output and 'enter' commands like,
+```
+ASSIGN @Dmm TO 722      ! 22 is the Instrument Address
+OUTPUT @Dmm; "*IDN?"    ! Send the command
+ENTER @Dmm; Rdg         ! Get the result
+PRINT Rdg               ! print the result
+```
+Where each write or read includes the instruments GPIB address and the command string. This driver is just as simple as the only instrument commands are ```write(inst_address, cmd_str)``` and ```write_read(inst_address, cmd_str)```. The driver takes care of adding and removing the string terminator characters appropriately, and also takes care of properly setting the GPIB address in the Prologix controller.  
+
+The equivalent code using this driver in Python is,
+```
+import prologix_usb_to_gpib            # Import the driver
+gpib = PrologixUsbToGpib(com_port=10)  # Setup with the COM port of the Prologix adapter, get a handle
+rdg = gpib.write_read(22, '*IDN?")     # Send command, get response.
+print(rdg)                             # Print the result
+```
+  
+### Usage:
 1) Get the code here, from the 'src' directory, and place it somewhere where your program can find it.  
 2) Use this simple outline to get going,  
    ```  
    place code here
    ```  
-  
-That's all! If you know the basic SCPI commands that you need to configure your instrument, and make a measurement, then that is all you need.  
   
 Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial supports.  
   
