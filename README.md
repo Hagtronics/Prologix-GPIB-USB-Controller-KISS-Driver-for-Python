@@ -36,7 +36,12 @@ print(rdg)                             # Print the result
 2) Use this simple outline to get going,  
    ```  
    place code here
-   ```  
+   ```
+
+### Driver Uses Settable Properties:  
+The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
   
-Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial supports.  
+  
+### Testing:  
+Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial and the FTDI driver supports.  
   
