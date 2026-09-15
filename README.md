@@ -27,7 +27,7 @@ The equivalent code using this driver in Python is,
 ```
 import prologix_usb_to_gpib            # Import the driver
 gpib = PrologixUsbToGpib(com_port=10)  # Setup with the COM port of the Prologix adapter, get a handle
-rdg = gpib.write_read(22, '*IDN?")     # Send command to instrument at address 22, get response.
+rdg = gpib.write_read(22, '*IDN?')     # Send command to instrument at address 22, get response.
 print(rdg)                             # Print the result
 ```
   
