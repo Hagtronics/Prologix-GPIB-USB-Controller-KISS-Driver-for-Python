@@ -23,7 +23,7 @@ Where each write (OUTPUT) or read (ENTER) includes the instruments GPIB address 
   
 This driver is just as simple as the only instrument commands are ```write(inst_address, cmd_str)``` and ```write_read(inst_address, cmd_str)```. The driver takes care of adding and removing the string terminator characters appropriately, and also takes care of properly setting the GPIB address in the Prologix controller.  
 
-The equivalent code using this driver in Python is,
+The equivalent code to above using this driver with Python is,
 ``` Python
 import prologix_usb_to_gpib            # Import the driver
 gpib = PrologixUsbToGpib(com_port=10)  # Setup with the COM port of the Prologix adapter, get a handle
