@@ -96,7 +96,25 @@ I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I d
 The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
   
 ### Driver Class Outline 'Tree View':  
-
+```
+prologix_gpib_usb.py
+└── PrologixGpibUsb
+    ├── __init__()
+    ├── __del__()
+    ├── _to_bytes()
+    ├── _to_string()
+    ├── _check_address()
+    ├── read_timeout_sec() @property
+    ├── read_timeout_sec() @read_timeout_sec.setter
+    ├── write_timeout_sec() @property
+    ├── write_timeout_sec() @write_timeout_sec.setter
+    ├── write_to_read_delay_sec() @property
+    ├── write_to_read_delay_sec() @write_to_read_delay_sec.setter
+    ├── terminator() @property
+    ├── terminator() @terminator.setter
+    ├── write()
+    └── write_read()
+```
     
 ### Testing:  
 Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial and the FTDI VCP driver supports.  
