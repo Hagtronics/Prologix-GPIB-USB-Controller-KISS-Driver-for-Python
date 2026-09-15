@@ -25,7 +25,7 @@ This driver is just as simple as the only instrument commands are ```write(inst_
 
 The equivalent code to above using this driver with Python is,
 ``` Python
-import prologix_gpib_usb            # Import the driver
+import prologix_gpib_usb               # Import the driver (this source code is in this repository)
 gpib = PrologixUsbToGpib(com_port=10)  # Setup with the COM port of the Prologix adapter, get a handle
 rdg = gpib.write_read(22, '*IDN?')     # Send command to instrument at address 22, get response.
 print(rdg)                             # Print the result
