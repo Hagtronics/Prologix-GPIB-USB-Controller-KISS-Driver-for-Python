@@ -105,13 +105,9 @@ prologix_gpib_usb.py
     ├── _to_string()
     ├── _check_address()
     ├── read_timeout_sec() @property
-    ├── read_timeout_sec() @read_timeout_sec.setter
     ├── write_timeout_sec() @property
-    ├── write_timeout_sec() @write_timeout_sec.setter
     ├── write_to_read_delay_sec() @property
-    ├── write_to_read_delay_sec() @write_to_read_delay_sec.setter
     ├── terminator() @property
-    ├── terminator() @terminator.setter
     ├── write()
     └── write_read()
 ```
