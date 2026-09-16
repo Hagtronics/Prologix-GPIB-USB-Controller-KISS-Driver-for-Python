@@ -130,7 +130,8 @@ prologix_gpib_usb.py
 2) The Prologix Adapter itself may hang up i.e. You can open the COM port but all you get are timeout errors. Un-plug and re-plug the Prologix Adapter to reset it.  
    
 ### Testing:  
-Tested on: Windows 7, 10 & 11 with Python 3.12. Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial and the FTDI VCP driver supports.  
+Tested with: Prologix GPIB-USB Controller version 5.1, on: Windows 7, 10 & 11 and Python 3.12.  
+Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial and the FTDI VCP driver supports.  
   
 ### References:
 * Source for Prologix GPIB to USB Adapters: https://prologix.biz/  
