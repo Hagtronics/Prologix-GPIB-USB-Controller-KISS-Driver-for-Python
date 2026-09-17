@@ -135,4 +135,6 @@ Since the heart of the code is based on PySerial and PySerial is cross platform,
   
 ### References:
 * Source for Prologix GPIB to USB Adapters: https://prologix.biz/  
-  
+* PySerial repository: https://github.com/pyserial/pyserial/   (use: ```pip install pyserial``` to get the library)  
+* FTDI VCP Driver Location: https://ftdichip.com/drivers/vcp-drivers/  
+   
