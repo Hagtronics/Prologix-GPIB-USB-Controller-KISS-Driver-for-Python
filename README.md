@@ -131,10 +131,10 @@ prologix_gpib_usb.py
    
 ### Testing:  
 Tested with: Prologix GPIB-USB Controller version 5.1, on: Windows 7, 10 & 11 and Python 3.12.  
-Since the heart of the code is based on PySerial and PySerial is cross platform, this driver should work on any OS that PySerial and the FTDI VCP driver supports.  
+Since the heart of the code is based on pySerial and pySerial is cross platform, this driver should work on any OS that pySerial and the FTDI VCP driver supports.  
   
 ### References:
 * Source for Prologix GPIB to USB Adapters: https://prologix.biz/  
-* PySerial repository: https://github.com/pyserial/pyserial/   (use: ```pip install pyserial``` to get the library)  
+* pySerial repository: https://github.com/pyserial/pyserial/   (use: ```pip install pySerial``` to get the library)  
 * FTDI VCP Driver Location: https://ftdichip.com/drivers/vcp-drivers/  
    
