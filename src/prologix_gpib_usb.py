@@ -7,7 +7,7 @@ Source: https://github.com/Hagtronics/Prologix-GPIB-USB-Controller-KISS-Driver-f
 
 Dependencies,
     FTDI VCP OS Driver for the Prologix USB/GPIB Adapter.
-    PySerial 3.5 for the serial port access to the FTDI driver.
+    pySerial 3.5 for the serial port access to the FTDI driver.
 """
 import contextlib
 import sys
