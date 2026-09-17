@@ -118,6 +118,7 @@ The default properties will work for the majority of modern SCPI instruments. Ho
 ```
 prologix_gpib_usb.py
 └── PrologixGpibUsb
+    ├── __version__
     ├── read_timeout_sec() @property
     ├── write_timeout_sec() @property
     ├── write_to_read_delay_sec() @property
