@@ -6,9 +6,10 @@ License: The Unlicense  https://unlicense.org/
 Source: https://github.com/Hagtronics/Prologix-GPIB-USB-Controller-KISS-Driver-for-Python
 
 Dependencies,
-    FTDI OS Driver for the Prologix USB/GPIB Adapter.
+    FTDI VCP OS Driver for the Prologix USB/GPIB Adapter.
     PySerial 3.5 for the serial port access to the FTDI driver.
 """
+import contextlib
 import sys
 import time
 
@@ -17,28 +18,30 @@ import serial  # PySerial
 
 class PrologixGpibUsb:
 
-    __version__ = '0.1'
+    __version__ = '0.2'
 
-    def __init__(self, com_port:int):
+    def __init__(self, com_port: int) -> None:
         """
         Prologix USB GPIB Adapter 'KISS' driver.
 
         Args:
             com_port (int): COM port where Prologix device is located.
+
         """
         # The instrument is addressed in the write() and write_read() functions
-        self._addr = 0
+        self._addr: int = -1
 
         # These are properties that can be set
-        self._read_timeout_sec = 10
-        self._write_timeout_sec = None
-        self._write_to_read_delay_sec = 0
-        self._terminator = '\r\n'
+        self._read_timeout_sec: float | None = 10
+        self._write_timeout_sec: float | None = None
+        self._write_to_read_delay_sec: float = 0
+        self._terminator: str = '\r\n'
 
         try:
             # open serial port, 9600 baud, 8 data bits, no parity, 1 stop bit,
             # 1 second timeout, no software flow control, RTS/CTS flow control
-            self._ser = serial.Serial(f'COM{com_port}',9600,8,'N',1,1,0,1,1)
+            #self._ser = serial.Serial(f'COM{com_port}',9600,8,'N',1,1,0,1,1)
+            self._ser = serial.Serial(f'COM{com_port}',9600,8,'N',1, timeout=1)
 
         except Exception as e:
             print(e)
@@ -64,14 +67,17 @@ class PrologixGpibUsb:
         self._ser.write('++read_tmo_ms 3000\r\n'.encode('utf-8'))   # set default tmo timeout to 3 seconds (Maximum)
         self._ser.write('++mode 1\r\n'.encode('utf-8'))             # put Prologix in controller mode
         self._ser.write('++auto 0\r\n'.encode('utf-8'))             # turn off Prologix Read-After-Write mode
-        self._ser.flushInput()                                      # discard data in serial buffer
+        self._ser.write('++eoi 0\r\n'.encode('utf-8'))              # disable EOI assertion
+        self._ser.write('++eos 2\r\n'.encode('utf-8'))              # append LF to instrument commands
+        self._ser.write('++eot_enable 0\r\n'.encode('utf-8'))       # do not append character when EOI detected
+        self._ser.write('++eot_char 0\r\n'.encode('utf-8'))         # This is the default value, but as per above it is not used
+        self._ser.flushInput()                                      # discard serial data in serial input buffer
 
     def __del__(self) -> None:
         """ Destructor """
-        try:
+        with contextlib.suppress(BaseException):
             self._ser.close()
-        finally:
-            return
+
 
 
     # ===== Private Helpers =================================================
@@ -82,6 +88,10 @@ class PrologixGpibUsb:
         return bytes_in.decode('ascii')
 
     def _check_address(self, address: int) -> None:
+        if address < 1 or address > 30:
+            msg = f'GPIB Address: {address} is outside the valid range of 1 to 30.'
+            raise ValueError(msg)
+
         if address != self._addr:
             self._addr = address
             self._ser.write(self._to_bytes(f'++addr {self._addr}\r\n'))
@@ -98,7 +108,7 @@ class PrologixGpibUsb:
         return self._read_timeout_sec
 
     @read_timeout_sec.setter
-    def read_timeout_sec(self, value)->None:
+    def read_timeout_sec(self, value: float | None) -> None:
         self._read_timeout_sec = value
         self._ser.timeout = self._read_timeout_sec
 
@@ -112,7 +122,7 @@ class PrologixGpibUsb:
         return self._write_timeout_sec
 
     @write_timeout_sec.setter
-    def write_timeout_sec(self, value)->None:
+    def write_timeout_sec(self, value: float | None) -> None:
         self._write_timeout_sec = value
         self._ser.write_timeout = self._write_timeout_sec
 
@@ -127,7 +137,7 @@ class PrologixGpibUsb:
         return self._write_to_read_delay_sec
 
     @write_to_read_delay_sec.setter
-    def write_to_read_delay_sec(self, value):
+    def write_to_read_delay_sec(self, value: float | None) -> None:
         if value is None:
             value = 0
         self._write_to_read_delay_sec = value
@@ -142,12 +152,12 @@ class PrologixGpibUsb:
         return self._terminator
 
     @terminator.setter
-    def terminator(self, value)->None:
+    def terminator(self, value: str) -> None:
         self._terminator = value
 
 
     # ===== Public Write and WriteRead Functions ===========================
-    def write(self, address: int, command: str)->None:
+    def write(self, address: int, command: str) -> None:
         """
         Write Command To Instrument at address.
         Does not block.
@@ -164,7 +174,7 @@ class PrologixGpibUsb:
     def write_read(self, address: int, command: str)->str:
         """
         Write Command Then Read Response from the Instrument at address.
-        Blocks until LF terminator is read in response or timeout happens.
+        Blocks until LF terminator is read in response or read timeout happens.
 
         Args:
             address (int): The Instruments GPIB Address.
@@ -233,9 +243,10 @@ if __name__ in '__main__':
         idn = 'HEWLETT-PACKARD,34401A,0,11-5-2'
         err = '+0,"No error"'
 
-    If the instrument can't be found the '*OPC?' will return '', meaning a timeout.
+    If the instrument can't be found the '*OPC?' will return '',
+    likely meaning a timeout.
 
-    Note: Not all GPIB instruments support the simple commands tested above.
-    Most support '*IDN?' however.
+    Note: Not all GPIB instruments support the simple commands
+    tested above. Most support '*IDN?' however.
     """
 
