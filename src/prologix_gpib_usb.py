@@ -18,7 +18,7 @@ import serial  # PySerial
 
 class PrologixGpibUsb:
 
-    __version__ = '0.2'
+    __version__ = '0.3'
 
     def __init__(self, com_port: int) -> None:
         """
@@ -60,18 +60,24 @@ class PrologixGpibUsb:
         rstr = str(self._ser.readline())
         if 'Prologix' not in rstr:
             self._ser.close()
-            print(f'Unable to locate the Prologix USB/GPIB interface on specified COM port: {com_port}.')
+            print(f'Unable to communicate with the Prologix USB/GPIB interface on specified COM port: {com_port}.')
             sys.exit()
 
-        # These settings work in 99.9% of cases for modern SCPI Instruments
-        self._ser.write('++read_tmo_ms 3000\r\n'.encode('utf-8'))   # set default tmo timeout to 3 seconds (Maximum)
-        self._ser.write('++mode 1\r\n'.encode('utf-8'))             # put Prologix in controller mode
-        self._ser.write('++auto 0\r\n'.encode('utf-8'))             # turn off Prologix Read-After-Write mode
-        self._ser.write('++eoi 0\r\n'.encode('utf-8'))              # disable EOI assertion
-        self._ser.write('++eos 2\r\n'.encode('utf-8'))              # append LF to instrument commands
-        self._ser.write('++eot_enable 0\r\n'.encode('utf-8'))       # do not append character when EOI detected
+        # Configure Prologix interface
+        
+        # Turn off autosaving of settings on version 6 interfaces
+        if '6' in rstr:
+            self._ser.write('++savecfg 0\r\n'.encode('utf-8'))
+        
+        # Settings for all interfaces
+        self._ser.write('++read_tmo_ms 3000\r\n'.encode('utf-8'))   # Set default tmo timeout to 3 seconds (Maximum)
+        self._ser.write('++mode 1\r\n'.encode('utf-8'))             # Put Prologix in controller mode
+        self._ser.write('++auto 0\r\n'.encode('utf-8'))             # Turn off Prologix Read-After-Write mode
+        self._ser.write('++eoi 0\r\n'.encode('utf-8'))              # Disable EOI assertion
+        self._ser.write('++eos 2\r\n'.encode('utf-8'))              # Append LF to instrument commands
+        self._ser.write('++eot_enable 0\r\n'.encode('utf-8'))       # Do not append character when EOI detected
         self._ser.write('++eot_char 0\r\n'.encode('utf-8'))         # This is the default value, but as per above it is not used
-        self._ser.flushInput()                                      # discard serial data in serial input buffer
+        self._ser.flushInput()
 
     def __del__(self) -> None:
         """ Destructor """
