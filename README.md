@@ -92,8 +92,11 @@ print(rdg)                             # Print the result
      
 #### User Hint: 
 I always 'fix' the COM Port of my Prologix Adapter to a specific COM port so I don't have to remember what port the PC assigned to the Adapter. Then I write this COM Port number on my adapter for easy 'recall'. On Windows, a specific COM port can be set by going to: 'Device Manager', then selecting the Prologix COM port that Windows assigned, right click and select 'Driver', then go to 'Advanced' and set a fixed COM port (one that isn't already in use by the PC). I usually pick COM port 10, but you can pick anything that isn't already in use by the PC. Now your code will work on any PC that you have 'set' and and you don't have to worry about the PC changing the port on you in the future, breaking your code.
+
+### Note to Version 6 (Yellow Body) Users:  
+The Prologix ```++savecfg``` property is disabled (i.e. set to 0) when the driver is instantiated. This is the function that continually saves any changes to the devices EEPROM. The setting is not permanent and resets itself ON at every adapter powerup.  
   
-### User Settable Properties:  
+### User Settable Driver Properties:  
 The default properties will work for the majority of modern SCPI instruments. However for older instruments some of these properties may need to be changed. All these properties can be set on the fly and the next commands(s) will use them.  
   
 ```read_timeout_sec(value)```
